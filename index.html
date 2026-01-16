@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        /* 基本样式 */
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
@@ -19,82 +20,102 @@
             text-align: center;
         }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 15px;
-            padding: 20px;
+        header h1 {
+            margin: 0;
+            font-size: 32px;
         }
 
-        .gallery img {
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 18px;
+        }
+
+        /* 分类样式 */
+        .category {
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        .category h2 {
+            border-left: 5px solid #007acc;
+            padding-left: 12px;
+            margin-bottom: 20px;
+            font-size: 22px;
+            color: #333;
+        }
+
+        /* 分类内部照片横排 */
+      .photo-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+}
+
+.photo-item {
+    width: 260px;
+    max-width: 260px;
+}
+
+
+        .photo-item img {
             width: 100%;
             height: auto;
             border-radius: 6px;
-            background-color: white;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            cursor: pointer;
         }
-.photo-item {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
-}
 
-.photo-item img {
-    border-radius: 6px;
-}
+        .photo-item p {
+            margin-top: 8px;
+            font-size: 14px;
+            color: #444;
+        }
 
-.photo-item figcaption {
-    margin-top: 8px;
-    font-size: 14px;
-    color: #444;
-}
-
-
+        /* Footer */
         footer {
             text-align: center;
             padding: 15px;
             font-size: 14px;
             color: #666;
         }
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 
-.lightbox-img {
-    max-width: 90%;
-    max-height: 80%;
-    border-radius: 8px;
-}
+        /* 放大图片样式 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-.lightbox-caption {
-    margin-top: 15px;
-    color: #fff;
-    font-size: 16px;
-    text-align: center;
-    max-width: 80%;
-}
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 8px;
+        }
 
-.close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    color: white;
-    font-size: 30px;
-    cursor: pointer;
-}
+        .lightbox-caption {
+            margin-top: 15px;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            max-width: 80%;
+        }
 
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -105,31 +126,132 @@
     <p>Photo Gallery</p>
 </header>
 
-<main class="gallery">
-<main class="gallery">
+<main>
 
-    <figure class="photo-item">
-        <img src="images/photo1.jpg" alt="照片1">
-        <figcaption>与清华大学专家交流</figcaption>
-    </figure>
+  <!-- 分类一 -->
+  <section class="category">
+    <h2>2026年1月14日，杨涵老师带队与清华大学专家讨论学习并合影留念</h2>
 
-    <figure class="photo-item">
-        <img src="images/photo2.jpg" alt="照片2">
-        <figcaption>清华交流</figcaption>
-    </figure>
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/exp1.jpg" alt="2026年1月14日，杨涵老师带队与清华大学专家讨论学习并合影留念1">
+            <p>交流学习现场</p>
+        </div>
 
-    <figure class="photo-item">
-        <img src="images/photo3.jpg" alt="照片3">
-        <figcaption>清华合影</figcaption>
-    </figure>
+        <div class="photo-item">
+            <img src="photos/exp2.jpg" alt="2026年1月14日，杨涵老师带队与清华大学专家讨论学习并合影留念2">
+            <p>合影留念</p>
+        </div>
+    </div>
+  </section>
 
+  <!-- 分类二 -->
+  <section class="category">
+    <h2>2025年12月6-8日第六届国际大讲堂</h2>
 
-</main>
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/djt1.jpg" alt="2025年12月6-8日第六届国际大讲堂1">
+            <p>包磊同学获最优汇报奖颁奖典礼</p>
+        </div>
+ <div class="photo-item">
+            <img src="photos/djt2.jpg" alt="2025年12月6-8日第六届国际大讲堂2">
+            <p>姚博同学上台汇报</p>
+        </div>
+ <div class="photo-item">
+            <img src="photos/djt3.jpg" alt="2025年12月6-8日第六届国际大讲堂3">
+            <p>刘翔同学与Martha Maria Suarez Lopez教授讨论海报内容</p>
+        </div>
+ <div class="photo-item">
+            <img src="photos/djt4.jpg" alt="2025年12月6-8日第六届国际大讲堂4">
+            <p>宋波同学和王少康同学与Subhamoy Bhattacharya教授合影留念</p>
+        </div>
+
+            </div>
+  </section>
+
+<section class="category">
+    <h2>2025年10月第六届土木工程青年学术研讨会</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/qnxs1.jpg">
+            <p>宋波同学、姚博同学与莫经纬同学担任志愿者合影留念</p>
+        </div>
+    </div>
+</section>
+<section class="category">
+    <h2>第五届东盟国际大讲堂</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/dm1.jpg">
+            <p>杨涵老师与课题组学生合影留念</p>
+        </div>
+<div class="photo-item">
+    <img src="photos/dm2.jpg">
+    <p>张恒同学上台汇报</p>
+</div>
+<div class="photo-item">
+    <img src="photos/dm3.jpg">
+    <p>包磊同学上台汇报</p>
+</div>
+<div class="photo-item">
+    <img src="photos/dm4.jpg">
+    <p>胡天宇同学上台汇报</p>
+</div>
+
+    </div>
+</section>
+<section class="category">
+    <h2>2024年8月基础设施安全与韧性国际会议</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/rx1.jpg">
+            <p>参会学生在台下听谢礼立院士汇报</p>
+        </div>
+    </div>
+</section>
+<section class="category">
+    <h2>2024年7月，杨涵老师带队前往天津市金万方钢结构有限公司实地考察并交流学习</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/jwf1.jpg">
+            <p>合影留念</p>
+        </div>
+<div class="photo-item">
+    <img src="photos/jwf2.jpg">
+    <p>讨论交流</p>
+</div>
+
+    </div>
+</section>
+<section class="category">
+    <h2>课题组日常活动照片</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/rc1.jpg">
+            <p>姚博同学在2025天津津南半程马拉松中获奖照片</p>
+        </div>
+<div class="photo-item">
+    <img src="photos/rc2.jpg">
+    <p>第六届青年学术研讨会中空暇时间游玩照片</p>
+</div>
+<div class="photo-item">
+    <img src="photos/rc3.jpg">
+    <p>年会照片</p>
+</div>
+
+    </div>
+</section>
 
 </main>
 
 <footer>
-    ? 2026 我的照片网站
+    <杨涵老师课题组照片>
 </footer>
 
 <!-- 放大图片遮罩层 -->
@@ -140,6 +262,7 @@
 </div>
 
 <script>
+    // 点击图片放大
     const images = document.querySelectorAll(".photo-item img");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = document.getElementById("lightbox-img");
@@ -163,6 +286,10 @@
             lightbox.style.display = "none";
         }
     });
+</script>
+
+</body>
+</html>
 </script>
 
 </body>
