@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>我的照片网站</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            background-color: white;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+        }
+.photo-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.photo-item img {
+    border-radius: 6px;
+}
+
+.photo-item figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #444;
+}
+
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+}
+
+.lightbox-caption {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    max-width: 80%;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>我的照片展示网站</h1>
+    <p>Photo Gallery</p>
+</header>
+
+<main class="gallery">
+<main class="gallery">
+
+    <figure class="photo-item">
+        <img src="images/photo1.jpg" alt="照片1">
+        <figcaption>与清华大学专家交流</figcaption>
+    </figure>
+
+    <figure class="photo-item">
+        <img src="images/photo2.jpg" alt="照片2">
+        <figcaption>清华交流</figcaption>
+    </figure>
+
+    <figure class="photo-item">
+        <img src="images/photo3.jpg" alt="照片3">
+        <figcaption>清华合影</figcaption>
+    </figure>
+
+
+</main>
+
+</main>
+
+<footer>
+    ? 2026 我的照片网站
+</footer>
+
+<!-- 放大图片遮罩层 -->
+<div id="lightbox" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" id="lightbox-img">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+    const images = document.querySelectorAll(".photo-item img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const closeBtn = document.querySelector(".close");
+
+    images.forEach(img => {
+        img.addEventListener("click", () => {
+            lightbox.style.display = "flex";
+            lightboxImg.src = img.src;
+            lightboxCaption.textContent = img.nextElementSibling.textContent;
+        });
+    });
+
+    closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+    });
+
+    lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>
