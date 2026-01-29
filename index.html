@@ -2,127 +2,228 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的照片网站</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>杨涵老师课题组活动照片集</title>
 
     <style>
-        /* 基本样式 */
+        /* ===== 页面整体背景 ===== */
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f2f2f2;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+
+            background-image: linear-gradient(
+            rgba(255,255,255,0.8),
+            rgba(255,255,255,0.8)
+        ), url("assets/bg.jpg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #ffffff;  
+        }
+
+        /* ===== 内容白色容器 ===== */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
         }
 
         header {
-            background-color: #222;
+            background: rgba(0, 0, 0, 0.65);
             color: white;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
+            border-radius: 10px;
         }
 
         header h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: 34px;
+            letter-spacing: 2px;
         }
 
         header p {
-            margin: 5px 0 0 0;
+            margin-top: 6px;
             font-size: 18px;
         }
 
-        /* 分类样式 */
         .category {
-            width: 100%;
-            margin-bottom: 60px;
+            margin-top: 50px;
         }
 
         .category h2 {
             border-left: 5px solid #007acc;
             padding-left: 12px;
-            margin-bottom: 20px;
             font-size: 22px;
             color: #333;
         }
 
-        /* 分类内部照片横排 */
-      .photo-list {
+        .photo-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .photo-item {
+            width: 260px;
+            text-align: center;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .photo-item p {
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+
+
+   <style>
+/* 基本样式 */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f2f2;
+}
+
+header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", Arial, sans-serif;
+}
+
+header p {
+    margin: 5px 0 0 0;
+    font-size: 18px;
+}
+
+/* 分类样式 */
+.category {
+    width: 100%;
+    margin-bottom: 60px;
+}
+
+.category h2 {
+    border-left: 5px solid #007acc;
+    padding-left: 12px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333;
+}
+
+/* 照片列表 */
+.photo-list {
     display: flex;
     flex-wrap: wrap;
     gap: 25px;
     justify-content: center;
 }
 
+/* 单张照片卡片 */
 .photo-item {
     width: 260px;
     max-width: 260px;
+    text-align: center;
 }
 
+/* 图片统一尺寸 */
+.photo-item img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-        .photo-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+/* 图片说明文字（居中 ✅） */
+.photo-item p {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #444;
+    line-height: 1.6;
+    text-align: center;
+}
 
-        .photo-item p {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #444;
-        }
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    color: #666;
+}
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
-            color: #666;
-        }
+/* 放大图片 */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
-        /* 放大图片样式 */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
+.lightbox-img {
+    max-width: 90%;
+    max-height: 80%;
+    border-radius: 8px;
+}
 
-        .lightbox-img {
-            max-width: 90%;
-            max-height: 80%;
-            border-radius: 8px;
-        }
+.lightbox-caption {
+    margin-top: 15px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    max-width: 80%;
+}
 
-        .lightbox-caption {
-            margin-top: 15px;
-            color: #fff;
-            font-size: 16px;
-            text-align: center;
-            max-width: 80%;
-        }
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+</style>
 
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
 
 <header>
-    <h1>我的照片展示网站</h1>
+    <h1>杨涵老师课题组活动照片集</h1>
     <p>Photo Gallery</p>
 </header>
 
@@ -169,6 +270,16 @@
 
             </div>
   </section>
+<section class="category">
+    <h2>2025年10月17日杨涵老师带队与清华大学教授讨论学习Cosim软件应用</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/cm1.jpg">
+            <p>参会学生合影留念</p>
+        </div>
+    </div>
+</section>
 
 <section class="category">
     <h2>2025年10月第六届土木工程青年学术研讨会</h2>
@@ -176,32 +287,33 @@
     <div class="photo-list">
         <div class="photo-item">
             <img src="photos/qnxs1.jpg">
-            <p>宋波同学、姚博同学与莫经纬同学担任志愿者合影留念</p>
+            <p>宋波同学、姚博同学与莫经纬同学参会合影留念</p>
         </div>
     </div>
 </section>
 <section class="category">
-    <h2>第五届东盟国际大讲堂</h2>
+    <h2>2025年6月第五届东盟国际大讲堂</h2>
 
     <div class="photo-list">
         <div class="photo-item">
             <img src="photos/dm1.jpg">
             <p>杨涵老师与课题组学生合影留念</p>
         </div>
-<div class="photo-item">
-    <img src="photos/dm2.jpg">
-    <p>张恒同学上台汇报</p>
-</div>
-<div class="photo-item">
-    <img src="photos/dm3.jpg">
-    <p>包磊同学上台汇报</p>
-</div>
-<div class="photo-item">
-    <img src="photos/dm4.jpg">
-    <p>胡天宇同学上台汇报</p>
-</div>
-
     </div>
+</section>
+<section class="category">
+    <h2>2025年6月7日-9日第十五届全国岩土力学数值模拟分析与解析方法研讨会</h2>
+
+    <div class="photo-list">
+        <div class="photo-item">
+            <img src="photos/yt1.jpg">
+            <p>宋波同学上台汇报</p>
+        </div>
+<div class="photo-item">
+    <img src="photos/yt2.jpg">
+    <p>宋波同学与张恒同学参会照片</p>
+</div>
+</div>
 </section>
 <section class="category">
     <h2>2024年8月基础设施安全与韧性国际会议</h2>
@@ -209,7 +321,7 @@
     <div class="photo-list">
         <div class="photo-item">
             <img src="photos/rx1.jpg">
-            <p>参会学生在台下听谢礼立院士汇报</p>
+            <p>参会学生在台下听谢礼立院士讲座</p>
         </div>
     </div>
 </section>
@@ -234,7 +346,7 @@
     <div class="photo-list">
         <div class="photo-item">
             <img src="photos/rc1.jpg">
-            <p>姚博同学在2025天津津南半程马拉松中获奖照片</p>
+            <p>姚博同学参加2025天津津南半程马拉松照片</p>
         </div>
 <div class="photo-item">
     <img src="photos/rc2.jpg">
@@ -243,6 +355,11 @@
 <div class="photo-item">
     <img src="photos/rc3.jpg">
     <p>年会照片</p>
+</div>
+
+<div class="photo-item">
+    <img src="photos/rc4.jpg">
+    <p>宋波同学荣获天津大学三好学生照片</p>
 </div>
 
     </div>
@@ -286,10 +403,6 @@
             lightbox.style.display = "none";
         }
     });
-</script>
-
-</body>
-</html>
 </script>
 
 </body>
