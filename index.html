@@ -179,7 +179,7 @@ footer {
     color: #666;
 }
 
-/* 放大图片 */
+/* 放大图片的样式 */
 .lightbox {
     display: none;
     position: fixed;
@@ -194,12 +194,35 @@ footer {
     flex-direction: column;
 }
 
+/* 左右箭头样式 */
+.arrow {
+    position: absolute;
+    top: 50%;
+    font-size: 40px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+}
+
+.left {
+    left: 20px;
+}
+
+.right {
+    right: 20px;
+}
+
+/* 图片展示样式 */
 .lightbox-img {
     max-width: 90%;
     max-height: 80%;
     border-radius: 8px;
 }
 
+/* 图片说明文字样式 */
 .lightbox-caption {
     margin-top: 15px;
     color: #fff;
@@ -207,6 +230,7 @@ footer {
     text-align: center;
     max-width: 80%;
 }
+
 
 .close {
     position: absolute;
@@ -374,36 +398,63 @@ footer {
 <!-- 放大图片遮罩层 -->
 <div id="lightbox" class="lightbox">
     <span class="close">&times;</span>
+    <!-- 左箭头 -->
+    <span class="arrow left" id="prevArrow">&#10094;</span>
+    <!-- 放大图片 -->
     <img class="lightbox-img" id="lightbox-img">
+    <!-- 图片说明文字 -->
     <div class="lightbox-caption" id="lightbox-caption"></div>
+    <!-- 右箭头 -->
+    <span class="arrow right" id="nextArrow">&#10095;</span>
 </div>
 
 <script>
-    // 点击图片放大
-    const images = document.querySelectorAll(".photo-item img");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
-    const lightboxCaption = document.getElementById("lightbox-caption");
-    const closeBtn = document.querySelector(".close");
+    // 获取所有图片和箭头
+    const images = document.querySelectorAll(".photo-item img");  // 获取所有照片
+    const lightbox = document.getElementById("lightbox");  // 获取放大层
+    const lightboxImg = document.getElementById("lightbox-img");  // 获取放大的图片
+    const lightboxCaption = document.getElementById("lightbox-caption");  // 获取图片说明
+    const closeBtn = document.querySelector(".close");  // 获取关闭按钮
+    const prevArrow = document.getElementById("prevArrow");  // 获取左箭头
+    const nextArrow = document.getElementById("nextArrow");  // 获取右箭头
 
-    images.forEach(img => {
+    let currentIndex = 0;  // 当前图片的索引
+
+    // 点击图片放大
+    images.forEach((img, index) => {
         img.addEventListener("click", () => {
-            lightbox.style.display = "flex";
-            lightboxImg.src = img.src;
-            lightboxCaption.textContent = img.nextElementSibling.textContent;
+            lightbox.style.display = "flex";  // 显示放大层
+            lightboxImg.src = img.src;  // 更新放大图片的路径
+            lightboxCaption.textContent = img.nextElementSibling.textContent;  // 更新图片说明
+            currentIndex = index;  // 更新当前图片的索引
         });
     });
 
+    // 点击关闭按钮
     closeBtn.addEventListener("click", () => {
-        lightbox.style.display = "none";
+        lightbox.style.display = "none";  // 关闭放大层
     });
 
+    // 点击遮罩区域关闭
     lightbox.addEventListener("click", (e) => {
         if (e.target === lightbox) {
-            lightbox.style.display = "none";
+            lightbox.style.display = "none";  // 关闭放大层
         }
     });
-</script>
 
+    // 切换到上一张图片
+    prevArrow.addEventListener("click", () => {
+        currentIndex = (currentIndex === 0) ? images.length - 1 : currentIndex - 1;  // 如果是第一张，则跳到最后一张
+        lightboxImg.src = images[currentIndex].src;  // 更新图片
+        lightboxCaption.textContent = images[currentIndex].nextElementSibling.textContent;  // 更新说明文字
+    });
+
+    // 切换到下一张图片
+    nextArrow.addEventListener("click", () => {
+        currentIndex = (currentIndex === images.length - 1) ? 0 : currentIndex + 1;  // 如果是最后一张，则跳到第一张
+        lightboxImg.src = images[currentIndex].src;  // 更新图片
+        lightboxCaption.textContent = images[currentIndex].nextElementSibling.textContent;  // 更新说明文字
+    });
+</script>
 </body>
 </html>
